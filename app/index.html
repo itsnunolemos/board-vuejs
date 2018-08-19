@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+	
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+	<link href="/css/style.css" rel="stylesheet">
+
+	<!-- Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700|Roboto:300,400" rel="stylesheet">
+
+	<title>Board - VueJS</title>
+</head>
+<body>
+
+	<header>
+		<i class="fas fa-sticky-note fa-7x"></i>
+		<h1>Board - VueJS</h1>
+	</header>
+
+	<div class="container" id="app">
+		<div class="row">
+
+			<div class="col-sm" v-for="(board, index) in boards">
+				<div class="card bg-light mb-3" >
+					<div class="card-header">{{board.name}}</div>
+					<div class="card-body">
+						<ul class="tasks">
+							<li v-for="tasks in board.task" class="row">
+								<div class="col-9" data-toggle="tooltip" data-placement="top" title="Double-click to edit" v-on:dblclick="tasks.edit = true" v-show="tasks.edit == false">{{tasks.title}}</div>
+
+								<input  class="col-9" type="text" v-show="tasks.edit == true" v-model="tasks.title" v-on:blur="tasks.edit=false; $emit('update')" v-on:keyup.enter="tasks.edit=false; $emit('update')">
+								<div class="col text-right" v-on:click="deleteTask(board, tasks)"><i class="fas fa-trash"></i></div>
+							</li>
+
+							<input type="text" v-show="board.newTask" v-model="newTaskContent[index]" v-on:blur="addNewTask(index, newTaskContent[index])" v-on:keyup.enter="addNewTask(index, newTaskContent[index]); board.newTask=false;" placeholder="Enter your task">
+
+						</ul>
+					</div>
+					<button type="button" class="btn btn-secondary" v-on:click="setNewTask(index)">Add new task</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<footer>
+		<ul class="social">
+			<li>
+				<a class="github-button" href="https://github.com/itsnunolemos" aria-label="Follow @itsnunolemos on GitHub">Follow @itsnunolemos</a>
+			</li>
+			
+			<li>
+				<a class="github-button" href="https://github.com/itsnunolemos/board-vuejs" data-icon="octicon-star" aria-label="Star itsnunolemos/board-vuejs on GitHub">Star</a>
+			</li>
+
+			<li>
+				<a href="https://twitter.com/itsnunolemos?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @itsnunolemos</a>
+			</li>
+	
+			<li>
+				<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a>
+			</li>
+		</ul>
+
+		<p class="text-center">Made with <span>♥</span> by <a href="https://twitter.com/itsnunolemos" target="_blank" >itsnunolemos</a></p>
+	</footer>
+
+
+	<!-- JavaScript -->
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+
+	<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+	<script defer src="https://use.fontawesome.com/releases/v5.0.2/js/all.js"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+	<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+	<script src="/js/main.js"></script>
+</body>
+</html>
