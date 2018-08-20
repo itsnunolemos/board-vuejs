@@ -6,7 +6,7 @@ Simple board (like Kanban Board) with Vue.js
 
 
 ## Demo
-[http://itsnunolemos.github.io/board-vuejs/](http://itsnunolemos.github.io/board-vuejs/)
+[http://itsnunolemos.github.io/board-vuejs/app/](http://itsnunolemos.github.io/board-vuejs/app)
 
 
 ## Build Setup
